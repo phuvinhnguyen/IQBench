@@ -23,6 +23,7 @@ cd data
 python process.py
 ```
 ### Get VLM's result on downloaded data
+You can run this command to the output file again to handle samples that VLM was failed to run  
 This command will evaluate gemini-1.5-flash on our 500 samples
 ```bash
 # go to folder: IQBench
@@ -34,6 +35,7 @@ python -m experiments.evaluate --input_file ./data/questions_processed.json \
 ```
 
 ### Get LLM's judgement on downloaded data
+You can run this command to the output file again to handle samples that VLM was failed to run  
 This command will evaluate gemini-1.5-flash on our 500 samples
 ```bash
 # go to folder: IQBench
