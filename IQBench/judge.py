@@ -58,10 +58,11 @@ Return 1 if the VLM's reasoning is correct and aligns with the ground truth, oth
             )])] for _think, _bot_answer, _answer, _pattern, _images
                 in zip(think, bot_answer, answer, pattern, images)]
         
-        if 'gpt' not in self.bot.model:
-            results = self.bot.run(inputs, batch=True)
-        else:
-            results = [self.bot.run(inp, batch=False) for inp in inputs]
+        ## Handle text only does not need to separate model for batch processing
+        # if 'gpt' not in self.bot.model and 'claude' not in self.bot.model:
+        results = self.bot.run(inputs, batch=True)
+        # else:
+        #     results = [self.bot.run(inp, batch=False) for inp in inputs]
             
         answers = [self.extract_answer(result['content'][0]['text']) for result in results]
         return [i[0] for i in answers], [i[1] for i in answers], [i[2] for i in answers], [self.bot.model for _ in answers]

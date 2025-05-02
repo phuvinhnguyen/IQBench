@@ -34,7 +34,7 @@ Your final answer for the question
 
     def process(self, images, questions):
         inputs = [[('user', [pil_to_tempfile_path(image), self.PROMPT.format(question=question)])] for image, question in zip(images, questions)]
-        if 'gpt' not in self.bot.model:
+        if 'gpt' not in self.bot.model and 'claude' not in self.bot.model:
             results = self.bot.run(inputs, batch=True)
         else:
             results = [self.bot.run(inp, batch=False) for inp in inputs]
