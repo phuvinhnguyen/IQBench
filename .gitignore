@@ -2,3 +2,5 @@
 */questions_processed.json
 **/__pycache__/
 **/raw/
+**/scripts/
+**/tmp/

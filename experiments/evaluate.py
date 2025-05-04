@@ -12,6 +12,8 @@ def main():
                       help='Path to the input JSON file containing questions')
     parser.add_argument('--output_file', type=str, required=True,
                       help='Path to save the output JSON file with answers')
+    parser.add_argument('--cache', type=str, default=None,
+                      help='path to cache file (pickle)')
     
     # Optional arguments with defaults
     parser.add_argument('--model_name', type=str, default='gemini/gemini-1.5-flash',
@@ -26,7 +28,7 @@ def main():
     
     # Initialize components
     bot = LLMInference(args.model_name, api_key=args.api_token)
-    agent = AnswerQuizz(bot)
+    agent = AnswerQuizz(bot, cache=args.cache)
     
     # Load and process data
     try:

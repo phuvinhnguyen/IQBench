@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import json
-import os
 import sys
 import argparse
 import asyncio
@@ -9,6 +8,51 @@ import aiohttp
 import aiofiles
 from pathlib import Path
 from tqdm import tqdm
+import os
+import imghdr
+from PIL import Image
+
+def fix_image_extensions(json_path: str):
+    # Đọc danh sách ảnh từ file JSON
+    with open(json_path, 'r') as rf:
+        image_items = json.load(rf)
+
+    for item in image_items:
+        path = Path(item["local_path"])
+
+        if not path.exists():
+            print(f"❌ File not found: {path}")
+            continue
+
+        actual_format = imghdr.what(path)  # ví dụ: 'jpeg', 'png'
+        if actual_format is None:
+            print(f"⚠️ Cannot determine format for: {path}")
+            continue
+
+        actual_ext = f".{actual_format}"
+
+        if path.suffix.lower() != actual_ext:
+            new_path = path.with_suffix(actual_ext)
+            try:
+                with Image.open(path) as img:
+                    img.save(new_path)
+                os.remove(path)
+
+                # Cập nhật lại các trường
+                item["file_name"] = new_path.name
+                item["local_path"] = str(new_path)
+
+                print(f"✅ Renamed and updated: {new_path}")
+            except Exception as e:
+                print(f"⚠️ Error processing {path}: {e}")
+        else:
+            print(f"✔️ No change needed: {path}")
+
+    # Ghi lại danh sách đã cập nhật
+    with open(json_path, 'w') as wf:
+        json.dump(image_items, wf, indent=2)
+    print(f"✅ Updated JSON file: {json_path}")
+
 
 async def download_image(session, url, output_path):
     """
@@ -182,6 +226,8 @@ async def main_async():
         print(f"\nSaved updated JSON with local paths to: {new_json_path}")
     except Exception as e:
         print(f"\nError saving updated JSON: {e}")
+
+    fix_image_extensions(new_json_path)
     
     print("\nDownload summary:")
     print(f"Successfully downloaded: {successful} images")

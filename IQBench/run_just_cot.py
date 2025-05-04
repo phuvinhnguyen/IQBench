@@ -2,7 +2,6 @@ from FlowDesign.processor import ThinkProcessor
 from FlowDesign.litellm import LLMInference
 import tempfile, re, os, pickle
 from tqdm import tqdm
-import time
 import litellm
 from datetime import datetime
 # litellm._turn_on_debug()
@@ -15,23 +14,12 @@ def pil_to_tempfile_path(pil_img, suffix=".png"):
 
 class AnswerQuizz(ThinkProcessor):
     modifies = ('full_answer', 'think', 'bot_answer', 'model_name')
-    PROMPT_NON_SUPPORT = '''Given the image, answer the following question: {question}
-Your answer must include your reasoning and strictly follow this format:
-<reason>
-Your step-by-step thinking to find the final answer of the problem
-</reason>
-<answer>
-Your final answer
-- For multiple choice, answer with a letter (A, B, C, etc.).
-- For numerical or computed answers, answer with a number.
-</answer>
 
-**IMPORTANT**
-- your answer must include <reason> and <answer> sections
-- your answer must start with <reason> and end with </answer>
-- <reason> section provide your step-by-step thinking to answer the question'''
-    PROMPT_SUPPORT = '''Given the image, answer the following question: {question}
+    PROMPT = '''Given the image, answer the following question: {question}
 Your answer must strictly follow this format:
+<reason>
+Your step-by-step answer showing your process solving the problem
+</reason>
 <answer>
 Your final answer
 - For multiple choice, answer with a letter (A, B, C, etc.).
@@ -45,43 +33,26 @@ Your final answer
     def __init__(self, bot: LLMInference, cache=None):
         super().__init__()
         self.cache = cache
-        non_support_reasoning_models =['o1', 'o3', 'o4', 'gpt-4o']
-        self.support_reasoning = litellm.supports_reasoning(model=bot.model)
-        for i in non_support_reasoning_models:
-            if i in bot.model: self.support_reasoning = False
 
-        if self.support_reasoning:
-            bot.kwargs['reasoning_effort'] = 'low'
-            self.PROMPT = self.PROMPT_SUPPORT
-        else:
-            self.PROMPT = self.PROMPT_NON_SUPPORT
         self.bot = bot
-        self.unbatch = ['o1', 'o3', 'gpt', 'claude', 'gemini']
+        self.unbatch = ['o1', 'o3', 'gpt', 'claude']
 
     def extract_answer(self, text):
         try:
-            if self.support_reasoning:
-                try: extext = text['content'][0]['text']
-                except: extext = ''
-                answer_match = re.search(r"<answer>(.*?)</answer>", extext, re.DOTALL)
-                answer = answer_match.group(1).strip() if answer_match else ''
+            try: text = text['content'][0]['text']
+            except: text = ''
+            think_match = re.search(r"<reason>(.*?)</reason>", text, re.DOTALL)
+            answer_match = re.search(r"<answer>(.*?)</answer>", text, re.DOTALL)
 
-                return extext, text['response'].choices[0].message.reasoning_content, answer
-            else:
-                try: text = text['content'][0]['text']
-                except: text = ''
-                think_match = re.search(r"<reason>(.*?)</reason>", text, re.DOTALL)
-                answer_match = re.search(r"<answer>(.*?)</answer>", text, re.DOTALL)
+            think = think_match.group(1).strip() if think_match else ''
+            answer = answer_match.group(1).strip() if answer_match else ''
 
-                think = think_match.group(1).strip() if think_match else ''
-                answer = answer_match.group(1).strip() if answer_match else ''
-
-                return text, think, answer
+            return text, think, answer
         except Exception as e:
-            return text, '', ''
+            raise e
 
     def process(self, images, questions):
-        inputs = [[('user', [pil_to_tempfile_path(image), self.PROMPT.format(question=question)])] for image, question in zip(images, questions)]
+        inputs = [[('user', [self.PROMPT.format(question=question), pil_to_tempfile_path(image)])] for image, question in zip(images, questions)]
 
         handle_batch = True
         for i in self.unbatch:
@@ -99,8 +70,8 @@ Your final answer
             else: results = [{'error': 'not run'}] * len(inputs)
             with tqdm(inputs, desc="Running") as pbar:
                 for i, (inp, res) in enumerate(zip(pbar, results)):
-                    time.sleep(6)
                     if res['error'] == None: continue
+
                     tmp_answer = self.bot.run(inp, batch=False)
                     results[i] = tmp_answer
                     cost += self.bot.cost

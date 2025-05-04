@@ -20,7 +20,7 @@ cd IQBench
 ```bash
 # go to folder: IQBench/data
 cd data
-python process.py
+python process.py --json_file ./questions.json --output_folder ./images
 ```
 ### Get VLM's result on downloaded data
 You can run this command to the output file again to handle samples that VLM was failed to run  
@@ -107,3 +107,13 @@ python -m experiments.llmjudge --input_file ./results.json \
     "judge_model": "gemini/gemini-1.5-flash"
 }
 ```
+
+# TODO
+- [ ] Gemini 2.5
+- [ ] Gemini 2.0
+- [x] Claude Haiku 3.5
+- [x] Claude Sonnet 3.7
+- [ ] o3 mini
+- [x] o4 mini
+- [ ] o1 mini
+- [x] gpt-4o
