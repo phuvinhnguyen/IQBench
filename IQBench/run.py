@@ -45,15 +45,17 @@ Your final answer
     def __init__(self, bot: LLMInference, cache=None):
         super().__init__()
         self.cache = cache
-        non_support_reasoning_models =['o1', 'o3', 'o4', 'gpt-4o']
+        non_support_reasoning_models =['o1', 'o3', 'o4', 'gpt-4o', 'gemini']
         self.support_reasoning = litellm.supports_reasoning(model=bot.model)
         for i in non_support_reasoning_models:
             if i in bot.model: self.support_reasoning = False
 
         if self.support_reasoning:
+            print('reasoning model')
             bot.kwargs['reasoning_effort'] = 'low'
             self.PROMPT = self.PROMPT_SUPPORT
         else:
+            print('not reasoning model')
             self.PROMPT = self.PROMPT_NON_SUPPORT
         self.bot = bot
         self.unbatch = ['o1', 'o3', 'gpt', 'claude', 'gemini']
@@ -78,7 +80,7 @@ Your final answer
 
                 return text, think, answer
         except Exception as e:
-            return text, '', ''
+            return text['content'][0]['text'], '', ''
 
     def process(self, images, questions):
         inputs = [[('user', [pil_to_tempfile_path(image), self.PROMPT.format(question=question)])] for image, question in zip(images, questions)]
@@ -99,9 +101,9 @@ Your final answer
             else: results = [{'error': 'not run'}] * len(inputs)
             with tqdm(inputs, desc="Running") as pbar:
                 for i, (inp, res) in enumerate(zip(pbar, results)):
-                    time.sleep(6)
                     if res['error'] == None: continue
                     tmp_answer = self.bot.run(inp, batch=False)
+                    time.sleep(3)
                     results[i] = tmp_answer
                     cost += self.bot.cost
                     pbar.set_postfix({"cost": f"{cost:.4f}"})

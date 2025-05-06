@@ -7,6 +7,9 @@ class LLMJudge(ThinkProcessor):
 
     PROMPT = '''# Given the following information:
 
+## Question (You will not able to see the image as you should only compare the groud truth thinking and VLM's reasoning)
+{question}
+
 ## Ground Truth Reasoning (GT Reasoning)
 {pattern}
 
@@ -32,6 +35,11 @@ If the VLM's reasoning is flawed or deviates from the ground truth, provide spec
 <answer>
 Return 1 if the VLM's reasoning is correct and aligns with the ground truth, otherwise return 0.
 </answer>
+
+**IMPORTANT**
+- your answer must include <answer> section
+- contents inside the <answer> section must be just 1 or 0
+- your answer must start with <reason> and end with </answer>
 '''
 
     def __init__(self, bot: LLMInference):
@@ -39,28 +47,35 @@ Return 1 if the VLM's reasoning is correct and aligns with the ground truth, oth
         self.bot = bot
         
     def extract_answer(self, text):
-        think_match = re.search(r"<reason>(.*?)</reason>", text, re.DOTALL)
-        evidence_match = re.search(r"<evidence>(.*?)</evidence>", text, re.DOTALL)
-        answer_match = re.search(r"<answer>(.*?)</answer>", text, re.DOTALL)
+        try:
+            try: text = text['content'][0]['text']
+            except: print(text)
+            think_match = re.search(r"<reason>(.*?)</reason>", text, re.DOTALL)
+            evidence_match = re.search(r"<evidence>(.*?)</evidence>", text, re.DOTALL)
+            answer_match = re.search(r"<answer>(.*?)</answer>", text, re.DOTALL)
 
-        think = think_match.group(1).strip() if think_match else ''
-        evidence = evidence_match.group(1).strip() if evidence_match else ''
-        answer = answer_match.group(1).strip() if answer_match else ''
+            think = think_match.group(1).strip() if think_match else ''
+            evidence = evidence_match.group(1).strip() if evidence_match else ''
+            answer = answer_match.group(1).strip() if answer_match else ''
 
-        return think, evidence, answer
+            return think, evidence, answer
+        except:
+            return '', '', ''
 
-    def process(self, think, bot_answer, answer, pattern, images):
+
+    def process(self, question, think, bot_answer, answer, pattern, local_path):
         inputs = [[('user', [
             # pil_to_tempfile_path(_images),
             self.PROMPT.format(
+                question=_question,
                 think=_think,
                 bot_answer=_bot_answer,
                 answer=_answer,
                 pattern=_pattern
-            )])] for _think, _bot_answer, _answer, _pattern, _images
-                in zip(think, bot_answer, answer, pattern, images)]
+            )])] for _question, _think, _bot_answer, _answer, _pattern, _images
+                in zip(question, think, bot_answer, answer, pattern, local_path)]
         
         results = self.bot.run(inputs, batch=True)
             
-        answers = [self.extract_answer(result['content'][0]['text']) for result in results]
+        answers = [self.extract_answer(result) for result in results]
         return [i[0] for i in answers], [i[1] for i in answers], [i[2] for i in answers], [self.bot.model for _ in answers]

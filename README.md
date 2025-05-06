@@ -109,8 +109,8 @@ python -m experiments.llmjudge --input_file ./results.json \
 ```
 
 # TODO
-- [ ] Gemini 2.5
-- [ ] Gemini 2.0
+- [x] Gemini 2.5
+- [x] Gemini 2.0
 - [x] Claude Haiku 3.5
 - [x] Claude Sonnet 3.7
 - [ ] o3 mini

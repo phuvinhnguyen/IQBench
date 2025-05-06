@@ -47,6 +47,7 @@ def main():
         # Prepare inputs and get outputs
         inputs = {k: [i[k] for i in need_to_run_data] for k in need_to_run_data[0].keys()}
         outputs = agent(inputs)
+        print('Cost:', agent.bot.cost)
         
         # Format output
         output = [{k: v[i] for k, v in outputs.items()} 
@@ -63,7 +64,7 @@ def main():
     except json.JSONDecodeError:
         print(f"Error: Invalid JSON format in {args.input_file}")
     except Exception as e:
-        print(f"An unexpected error occurred: {str(e)}")
+        raise e
 
 if __name__ == "__main__":
     main()
