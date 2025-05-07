@@ -53,6 +53,19 @@ def fix_image_extensions(json_path: str):
         json.dump(image_items, wf, indent=2)
     print(f"✅ Updated JSON file: {json_path}")
 
+def fix_anagram(file):
+    with open(file) as rf:
+        data = json.load(rf)
+
+    for i in data:
+        if 'Anagram' in i['topic']:
+            i['question'] = '''Some of the options are anagrams and can be reordered to form English words.
+Count the number of sets that hide a dictionary-approved word.
+Example: ENW is an anagram for NEW and RCA is an anagram for CAR. Both options should be selected.
+Finally, answer with JUST a number of this question: How many sets that hide a dictionary-approved word?'''
+
+    with open(file, 'w') as wf:
+        json.dump(data, wf, indent=4)
 
 async def download_image(session, url, output_path):
     """
@@ -187,8 +200,8 @@ async def download_all_images(data, output_folder, max_images, max_concurrent=20
 
 async def main_async():
     parser = argparse.ArgumentParser(description='Download images from a JSON file asynchronously.')
-    parser.add_argument('--json_file', required=True, default='./questions.json', help='Path to the JSON file containing image information.')
-    parser.add_argument('--output_folder', required=True, default='./images', help='Path to the folder where images will be saved.')
+    parser.add_argument('--json_file', required=False, default='./questions.json', help='Path to the JSON file containing image information.')
+    parser.add_argument('--output_folder', required=False, default='./images', help='Path to the folder where images will be saved.')
     parser.add_argument('--max-images', type=int, default=500, help='Maximum number of images to download (optional)')
     parser.add_argument('--max-concurrent', type=int, default=20, 
                        help='Maximum number of concurrent downloads (default: 20)')
@@ -228,6 +241,7 @@ async def main_async():
         print(f"\nError saving updated JSON: {e}")
 
     fix_image_extensions(new_json_path)
+    fix_anagram(new_json_path)
     
     print("\nDownload summary:")
     print(f"Successfully downloaded: {successful} images")

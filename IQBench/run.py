@@ -103,7 +103,7 @@ Your final answer
                 for i, (inp, res) in enumerate(zip(pbar, results)):
                     if res['error'] == None: continue
                     tmp_answer = self.bot.run(inp, batch=False)
-                    time.sleep(3)
+                    time.sleep(6)
                     results[i] = tmp_answer
                     cost += self.bot.cost
                     pbar.set_postfix({"cost": f"{cost:.4f}"})
