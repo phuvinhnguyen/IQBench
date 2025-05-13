@@ -18,7 +18,7 @@ class AnswerQuizz(ThinkProcessor):
     PROMPT_NON_SUPPORT = '''Given the image, answer the following question: {question}
 Your answer must include your reasoning and strictly follow this format:
 <reason>
-Your step-by-step thinking to find the final answer of the problem
+Your thinking to find the final answer of the problem
 </reason>
 <answer>
 Your final answer
@@ -29,7 +29,7 @@ Your final answer
 **IMPORTANT**
 - your answer must include <reason> and <answer> sections
 - your answer must start with <reason> and end with </answer>
-- <reason> section provide your step-by-step thinking to answer the question'''
+- <reason> section provide your thinking to answer the question'''
     PROMPT_SUPPORT = '''Given the image, answer the following question: {question}
 Your answer must strictly follow this format:
 <answer>

@@ -33,6 +33,7 @@ python -m experiments.evaluate --input_file ./data/questions_processed.json \
 --api_token <YOUR_TOKEN> \
 --num_samples 500
 ```
+Result (each sample) of the experiment will be saved in `results.json`, you can compute the accuracy of each topic using this generated file.
 
 ### Get LLM's judgement on downloaded data
 You can run this command to the output file again to handle samples that VLM was failed to run  
@@ -46,6 +47,11 @@ python -m experiments.llmjudge --input_file ./results.json \
 --api_token <YOUR_TOKEN> \
 --num_samples 500
 ```
+Result (each sample) of the experiment will be saved in `results_llmjudge.json`, you can compute the llmjudge score of each topic using this generated file.
+
+### Quick example
+Refer to all files in ./scipts
+
 
 ### Output explain
 
@@ -81,6 +87,7 @@ python -m experiments.llmjudge --input_file ./results.json \
 - **`judge_answer`**: Final judgment (`1` = correct, `0` = incorrect)  
 - **`judge_model`**: LLM used for judgment  
 
+### Example json data after using LLM-as-a-judge to evaluate reasoning
 ```json
 {
     "id": 1,
@@ -113,7 +120,5 @@ python -m experiments.llmjudge --input_file ./results.json \
 - [x] Gemini 2.0
 - [x] Claude Haiku 3.5
 - [x] Claude Sonnet 3.7
-- [ ] o3 mini
 - [x] o4 mini
-- [ ] o1 mini
 - [x] gpt-4o
