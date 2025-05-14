@@ -67,6 +67,17 @@ Finally, answer with JUST a number of this question: How many sets that hide a d
     with open(file, 'w') as wf:
         json.dump(data, wf, indent=4)
 
+def fix_verbal_reasoning(file):
+    with open(file) as rf:
+        data = json.load(rf)
+
+    for i in data:
+        if 'Verbal Reasoning Test with Syllogisms' in i['topic'] or 'Inductive Verbal Reasoning Test' in i['topic']:
+            i['question'] = 'Answer the multiple-choice question in the image with reasoning, and give only the letter of the correct option as the final answer.'
+
+    with open(file, 'w') as wf:
+        json.dump(data, wf, indent=4)
+
 async def download_image(session, url, output_path):
     """
     Asynchronously download an image from the given URL and save it.
@@ -242,6 +253,7 @@ async def main_async():
 
     fix_image_extensions(new_json_path)
     fix_anagram(new_json_path)
+    fix_verbal_reasoning(new_json_path)
     
     print("\nDownload summary:")
     print(f"Successfully downloaded: {successful} images")

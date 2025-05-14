@@ -1,3 +1,5 @@
+# !!! This file is no longer needed as the vlms can parse the answer correctly
+
 import json
 import os
 from FlowDesign.litellm import LLMInference
@@ -33,11 +35,7 @@ A single letter or number
 bot = LLMInference('gemini/gemini-1.5-flash', api_key='<TOKEN>')
 
 files = [
-'/home/kat/Desktop/FPTAI/IQBench/experiments/results/results_o4mini_done.json',
-'/home/kat/Desktop/FPTAI/IQBench/experiments/results/results_gemini-2.0-flash.json',
-'/home/kat/Desktop/FPTAI/IQBench/experiments/results/results_claude-3-5-sonnet-20240620_done.json',
-'/home/kat/Desktop/FPTAI/IQBench/experiments/results/results_claude-3-7-sonnet-20250219_done.json',
-'/home/kat/Desktop/FPTAI/IQBench/experiments/results/results_gpt4o_done.json'
+    
 ]
 
 for file in files:

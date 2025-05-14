@@ -1,3 +1,5 @@
+# !!! This file is no longer needed as the anagram evaluation can be done in the evaluate script
+
 from IQBench.run import AnswerQuizz
 from FlowDesign.litellm import LLMInference
 import argparse

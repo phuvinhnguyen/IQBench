@@ -1,5 +1,8 @@
-**/images/
 */questions_processed.json
+*/questions.json
 **/__pycache__/
 **/raw/
 **/tmp/
+**/results/
+**/results2/
+**/results_zip/

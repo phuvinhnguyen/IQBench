@@ -9,13 +9,12 @@ This package depends on FlowDesign, which can be installed with:
 pip install git+https://github.com/phuvinhnguyen/FlowDesign.git
 ```
 
-After that, you can clone this repo
-```bash
-git clone git+https://github.com/phuvinhnguyen/IQBench.git
-cd IQBench
-```
+After that, you can clone this repo cd use `cd` to get into the IQBench folder
 
 ## Usage
+### Important
+To ensure the name of authors are hidden, files `questions.json` and `questions_processed.json` are not included in the project, instead, we include file `questions_processed_anonymous.json`, which can be used as `questions_processed.json`. Images are also included in the repo, so you dont need to download the data (the next step).
+
 ### Download data
 ```bash
 # go to folder: IQBench/data
