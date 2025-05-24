@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Models - Markdown Site</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Machine Learning Models | Markdown Site</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Machine Learning Models" />
+<meta name="author" content="Your Name" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A beautiful site generated from markdown files" />
+<meta property="og:description" content="A beautiful site generated from markdown files" />
+<link rel="canonical" href="http://localhost:4000/ml-models/" />
+<meta property="og:url" content="http://localhost:4000/ml-models/" />
+<meta property="og:site_name" content="Markdown Site" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-03-22T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Machine Learning Models" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Your Name"},"dateModified":"2024-03-22T00:00:00+01:00","datePublished":"2024-03-22T00:00:00+01:00","description":"A beautiful site generated from markdown files","headline":"Machine Learning Models","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/ml-models/"},"url":"http://localhost:4000/ml-models/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <nav class="navbar animate__animated animate__fadeIn">
+        <div class="container">
+            <a href="/" class="logo">IQBench</a>
+            <div class="nav-links">
+                <!-- <a href="/">Home</a>
+                <a href="/posts">Posts</a>
+                <a href="/ml-models">Models</a>
+                <a href="/about">About</a> -->
+            </div>
+        </div>
+    </nav>
+
+    <main class="container animate__animated animate__fadeIn">
+        <div class="auth-container">
+    <div class="auth-buttons">
+        <button id="google-auth-button" class="btn btn-primary">
+            <i class="fab fa-google"></i> Continue with Google
+        </button>
+        <div class="auth-divider">
+            <span>or</span>
+        </div>
+        <form id="email-auth-form" class="email-auth-form">
+            <input type="email" id="email-input" placeholder="Email address" required>
+            <input type="password" id="password-input" placeholder="Password" required>
+            <button type="submit" class="btn btn-secondary">Continue with Email</button>
+        </form>
+    </div>
+</div>
+
+<div class="auth-status" style="display: none;">
+    <div id="user-profile" class="user-profile">
+        <img id="user-image" src="" alt="Profile Picture" class="profile-picture">
+        <div class="user-info">
+            <h3 id="user-name"></h3>
+            <p id="user-email"></p>
+            <div class="user-stats">
+                <span id="user-tier">Free Tier</span>
+                <span id="user-credits">Credits: 100</span>
+            </div>
+        </div>
+        <div class="user-actions">
+            <button id="upgrade-button" class="btn btn-success">
+                <i class="fas fa-crown"></i> Upgrade to Premium
+            </button>
+            <button id="signout-button" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i> Sign Out
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="ml-models-container" style="display: none;">
+    <div class="models-grid">
+        <div class="model-card" onclick="openModelInterface('text')">
+            <i class="fas fa-font"></i>
+            <h3>Text Generation</h3>
+            <p>Generate text content</p>
+        </div>
+        <div class="model-card" onclick="openModelInterface('image')">
+            <i class="fas fa-image"></i>
+            <h3>Image Generation</h3>
+            <p>Create images from text</p>
+        </div>
+        <div class="model-card" onclick="openModelInterface('audio')">
+            <i class="fas fa-music"></i>
+            <h3>Audio Generation</h3>
+            <p>Generate audio content</p>
+        </div>
+        <div class="model-card" onclick="openModelInterface('multimodal')">
+            <i class="fas fa-random"></i>
+            <h3>Multimodal Generation</h3>
+            <p>Combine different types</p>
+        </div>
+    </div>
+</div>
+
+<div class="model-interface" style="display: none;">
+    <div class="model-content">
+        <button class="close-button" onclick="closeModelInterface()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="model-input">
+            <h3>Input</h3>
+            <textarea id="model-input-text" placeholder="Enter your prompt..."></textarea>
+            <input type="file" id="model-input-file" style="display: none;">
+            <button class="btn btn-primary" onclick="generateContent()">
+                <i class="fas fa-magic"></i> Generate
+            </button>
+        </div>
+        <div class="model-output">
+            <h3>Output</h3>
+            <div id="model-output-content"></div>
+        </div>
+    </div>
+</div>
+
+<h1 id="machine-learning-models">Machine Learning Models</h1>
+
+<p>Welcome to our collection of machine learning models. Please sign in to access these powerful tools.</p>
+
+<h2 id="text-generation-model">Text Generation Model</h2>
+
+<p>The text generation model can help you create various types of text content:</p>
+
+<h3 id="features">Features</h3>
+<ul>
+  <li>Natural language generation</li>
+  <li>Multiple language support</li>
+  <li>Style customization</li>
+  <li>Length control</li>
+</ul>
+
+<h3 id="example-use-cases">Example Use Cases</h3>
+<ul>
+  <li>Content creation</li>
+  <li>Story writing</li>
+  <li>Code generation</li>
+  <li>Technical documentation</li>
+</ul>
+
+<h3 id="how-to-use">How to Use</h3>
+<ol>
+  <li>Enter your prompt or initial text</li>
+  <li>Adjust parameters if needed</li>
+  <li>Click “Generate”</li>
+  <li>Review and edit the output</li>
+</ol>
+
+<h2 id="image-generation-model">Image Generation Model</h2>
+
+<p>Create stunning images from text descriptions:</p>
+
+<h3 id="features-1">Features</h3>
+<ul>
+  <li>High-resolution output</li>
+  <li>Style transfer</li>
+  <li>Image editing</li>
+  <li>Multiple formats</li>
+</ul>
+
+<h3 id="example-use-cases-1">Example Use Cases</h3>
+<ul>
+  <li>Art creation</li>
+  <li>Design mockups</li>
+  <li>Concept visualization</li>
+  <li>Photo enhancement</li>
+</ul>
+
+<h3 id="how-to-use-1">How to Use</h3>
+<ol>
+  <li>Describe the image you want</li>
+  <li>Upload a reference image (optional)</li>
+  <li>Click “Generate”</li>
+  <li>Download or share the result</li>
+</ol>
+
+<h2 id="audio-generation-model">Audio Generation Model</h2>
+
+<p>Generate and manipulate audio content:</p>
+
+<h3 id="features-2">Features</h3>
+<ul>
+  <li>Text-to-speech</li>
+  <li>Music generation</li>
+  <li>Audio style transfer</li>
+  <li>Format conversion</li>
+</ul>
+
+<h3 id="example-use-cases-2">Example Use Cases</h3>
+<ul>
+  <li>Voice overs</li>
+  <li>Music composition</li>
+  <li>Sound effects</li>
+  <li>Audio editing</li>
+</ul>
+
+<h3 id="how-to-use-2">How to Use</h3>
+<ol>
+  <li>Enter text or upload audio</li>
+  <li>Select output format</li>
+  <li>Click “Generate”</li>
+  <li>Play or download the audio</li>
+</ol>
+
+<h2 id="multimodal-model">Multimodal Model</h2>
+
+<p>Combine different types of inputs and outputs:</p>
+
+<h3 id="features-3">Features</h3>
+<ul>
+  <li>Cross-modal generation</li>
+  <li>Complex transformations</li>
+  <li>Multiple output formats</li>
+  <li>Advanced customization</li>
+</ul>
+
+<h3 id="example-use-cases-3">Example Use Cases</h3>
+<ul>
+  <li>Text to image and audio</li>
+  <li>Image to text description</li>
+  <li>Audio to text transcription</li>
+  <li>Mixed media generation</li>
+</ul>
+
+<h3 id="how-to-use-3">How to Use</h3>
+<ol>
+  <li>Choose input type</li>
+  <li>Select output format</li>
+  <li>Enter your content</li>
+  <li>Click “Generate”</li>
+</ol>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<ol>
+  <li><strong>Start Simple</strong>
+    <ul>
+      <li>Begin with basic prompts</li>
+      <li>Gradually add complexity</li>
+      <li>Test different parameters</li>
+    </ul>
+  </li>
+  <li><strong>Quality Control</strong>
+    <ul>
+      <li>Review all generated content</li>
+      <li>Edit when necessary</li>
+      <li>Save successful prompts</li>
+    </ul>
+  </li>
+  <li><strong>Resource Management</strong>
+    <ul>
+      <li>Monitor usage limits</li>
+      <li>Save important outputs</li>
+      <li>Clean up unused files</li>
+    </ul>
+  </li>
+  <li><strong>Security</strong>
+    <ul>
+      <li>Don’t share sensitive data</li>
+      <li>Use appropriate content</li>
+      <li>Follow usage guidelines</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="common-issues">Common Issues</h3>
+<ul>
+  <li>Generation timeouts</li>
+  <li>Quality concerns</li>
+  <li>Format compatibility</li>
+  <li>Resource limits</li>
+</ul>
+
+<h3 id="solutions">Solutions</h3>
+<ul>
+  <li>Simplify prompts</li>
+  <li>Check file formats</li>
+  <li>Clear browser cache</li>
+  <li>Contact support</li>
+</ul>
+
+<h2 id="support">Support</h2>
+
+<p>Need help? Contact us:</p>
+<ul>
+  <li>Email: support@example.com</li>
+  <li>Documentation: [Link to docs]</li>
+  <li>Community Forum: [Link to forum]</li>
+</ul>
+
+<p>Remember to sign in to access these models and start creating amazing content!</p>
+
+
+<script src="/assets/js/auth.js"></script>
+<script src="/assets/js/ml-models.js"></script> 
+    </main>
+
+    <footer class="footer animate__animated animate__fadeIn">
+        <div class="container">
+            <p>&copy; 2025 IQBench. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+</body>
+</html> 

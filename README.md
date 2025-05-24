@@ -1,123 +1,86 @@
-# IQBench
+# Markdown Site Generator
 
-This package evaluate VLMs' reasoning ability on IQ tests
+A beautiful, responsive website generator that converts markdown files into a modern website. Built with Jekyll, this project provides a clean and customizable way to showcase your markdown content.
+
+## Features
+
+- Convert markdown files to beautiful web pages
+- Support for images, code blocks, tables, and more
+- Responsive design that works on all devices
+- Smooth animations and transitions
+- Syntax highlighting for code blocks
+- Customizable styling
+- Easy navigation between posts
+- SEO optimized
+
+## Prerequisites
+
+- Ruby (version 2.5.0 or higher)
+- RubyGems
+- Bundler
 
 ## Installation
 
-This package depends on FlowDesign, which can be installed with:
+1. Clone this repository:
 ```bash
-pip install git+https://github.com/phuvinhnguyen/FlowDesign.git
+git clone <your-repo-url>
+cd markdown-site
 ```
 
-After that, you can clone this repo cd use `cd` to get into the IQBench folder
+2. Install dependencies:
+```bash
+bundle install
+```
 
 ## Usage
-### Important
-To ensure the name of authors are hidden, files `questions.json` and `questions_processed.json` are not included in the project, instead, we include file `questions_processed_anonymous.json`, which can be used as `questions_processed.json`. Images are also included in the repo, so you dont need to download the data (the next step).
 
-### Download data
+1. Add your markdown files to the `_posts` directory. Files should be named in the format: `YYYY-MM-DD-title.md`
+
+2. Each markdown file should include front matter at the top:
+```yaml
+---
+layout: post
+title: Your Post Title
+author: Your Name
+date: YYYY-MM-DD
+---
+```
+
+3. To run the site locally:
 ```bash
-# go to folder: IQBench/data
-cd data
-python process.py --json_file ./questions.json --output_folder ./images
-```
-### Get VLM's result on downloaded data
-You can run this command to the output file again to handle samples that VLM was failed to run  
-This command will evaluate gemini-1.5-flash on our 500 samples
-```bash
-# go to folder: IQBench
-python -m experiments.evaluate --input_file ./data/questions_processed.json \
---output_file ./results.json \
---model_name gemini/gemini-1.5-flash \
---api_token <YOUR_TOKEN> \
---num_samples 500
-```
-Result (each sample) of the experiment will be saved in `results.json`, you can compute the accuracy of each topic using this generated file.
-
-### Get LLM's judgement on downloaded data
-You can run this command to the output file again to handle samples that VLM was failed to run  
-This command will evaluate gemini-1.5-flash on our 500 samples
-```bash
-# go to folder: IQBench
-# input file is the output file from the previous step
-python -m experiments.llmjudge --input_file ./results.json \
---output_file ./results_llmjudge.json \
---model_name gemini/gemini-1.5-flash \
---api_token <YOUR_TOKEN> \
---num_samples 500
-```
-Result (each sample) of the experiment will be saved in `results_llmjudge.json`, you can compute the llmjudge score of each topic using this generated file.
-
-### Quick example
-Refer to all files in ./scipts
-
-
-### Output explain
-
-#### Metadata
-- **`id`**: Unique sample ID  
-- **`file_name`**: Original image file name  
-- **`online_link`**: URL to online image source  
-- **`source`**: Source of the question (if collected)  
-- **`topic`**: Topic/category of the image  
-- **`author`**: Author of the sample  
-
-####️ Image Info
-- **`link`**: Renamed local image file  
-- **`local_path` / `images`**: Local path to downloaded image  
-
-#### QA Content
-- **`question` / `questions`**: Question related to the image  
-- **`answer`**: Ground-truth answer (label)  
-- **`pattern`**: Ground-truth reasoning/explanation  
-
-#### Status
-- **`ready`**: Whether sample is ready for evaluation (`1` or `0`)  
-
-#### VLM Output
-- **`think`**: VLM's reasoning before answering  
-- **`bot_answer`**: VLM's final answer  
-- **`full_answer`**: Full generated response  
-- **`model_name`**: Name of evaluated VLM  
-
-#### Judge LLM
-- **`judge_think`**: Judgment on VLM’s reasoning  
-- **`judge_evidence`**: Supporting or refuting evidence  
-- **`judge_answer`**: Final judgment (`1` = correct, `0` = incorrect)  
-- **`judge_model`**: LLM used for judgment  
-
-### Example json data after using LLM-as-a-judge to evaluate reasoning
-```json
-{
-    "id": 1,
-    "file_name": "C1.png",
-    "online_link": "https://...",
-    "topic": "Mechanical Deductive Reasoning Test",
-    "author": "anonymous",
-    "question": "The smaller gear makes 36 revolutions by the time the larger ones make 18.\nIf the smaller gear makes 56 revolutions, how many turns will the larger one make?\nA. 24 \nB. 26 \nC. 28 \nD. 25 \n",
-    "answer": "C",
-    "pattern": "Explanation:\n\\[\nu = \\frac{18}{36} = 0.5\n\\]\n\\[\nn_{\\text{larger}} = u \\cdot 56 = 28\n\\]\n",
-    "source": "https://...",
-    "ready": 1,
-    "link": "image_001.png",
-    "local_path": "path/to/image_001.png",
-    "images": "path/to/image_001.png",
-    "questions": "The smaller gear makes 36 revolutions by the time the larger ones make 18.\nIf the smaller gear makes 56 revolutions, how many turns will the larger one make?\nA. 24 \nB. 26 \nC. 28 \nD. 25 \n",
-    "bot_answer": "C. 28",
-    "full_answer": "<think>\nLet $n_s$ be the number of revolutions of the smaller gear and $n_l$ be the number of revolutions of the larger gear.\nWe are given that when the smaller gear makes 36 revolutions, the larger gear makes 18 revolutions.\nThis can be written as a ratio:\n$\\frac{n_s}{n_l} = \\frac{36}{18} = 2$\nThis means that the smaller gear makes twice as many revolutions as the larger gear.\nWe can write this relationship as:\n$n_s = 2n_l$\nWe are given that the smaller gear makes 56 revolutions, so $n_s = 56$.\nWe can find the number of revolutions of the larger gear by substituting $n_s = 56$ into the equation:\n$56 = 2n_l$\n$n_l = \\frac{56}{2} = 28$\nTherefore, the larger gear will make 28 turns.\n\n</think>\n<answer>\nC. 28\n</answer>",
-    "think": "Let $n_s$ be the number of revolutions of the smaller gear and $n_l$ be the number of revolutions of the larger gear.\nWe are given that when the smaller gear makes 36 revolutions, the larger gear makes 18 revolutions.\nThis can be written as a ratio:\n$\\frac{n_s}{n_l} = \\frac{36}{18} = 2$\nThis means that the smaller gear makes twice as many revolutions as the larger gear.\nWe can write this relationship as:\n$n_s = 2n_l$\nWe are given that the smaller gear makes 56 revolutions, so $n_s = 56$.\nWe can find the number of revolutions of the larger gear by substituting $n_s = 56$ into the equation:\n$56 = 2n_l$\n$n_l = \\frac{56}{2} = 28$\nTherefore, the larger gear will make 28 turns.",
-    "model_name": "gemini/gemini-1.5-flash",
-    "judge_think": "The VLM's reasoning and the ground truth reasoning both arrive at the same correct answer (28), but they approach the problem from slightly different perspectives.  The ground truth uses a ratio directly derived from the given data (18/36) to calculate a scaling factor (0.5), then applies that factor to the new number of revolutions (56). The VLM, on the other hand, establishes a direct relationship between the number of revolutions of the smaller and larger gears ($n_s = 2n_l$), then solves for the number of revolutions of the larger gear given the number of revolutions of the smaller gear.  Both methods are logically sound and arrive at the same correct conclusion.  The key steps \u2013 establishing the relationship between the gears' revolutions and using this relationship to find the unknown \u2013 are present in both.  There are no discrepancies in the final answer.",
-    "judge_evidence": "The VLM's reasoning is logically valid.  It correctly identifies the inverse proportional relationship between the number of revolutions of the smaller and larger gears.  The equation $n_s = 2n_l$ accurately reflects this relationship, derived from the initial data. The subsequent steps of substituting $n_s = 56$ and solving for $n_l$ are mathematically sound and lead to the correct answer.  The ground truth implicitly uses the same relationship, but expresses it through a ratio and scaling factor. Both methods are equivalent and lead to the same result.",
-    "judge_answer": "1",
-    "judge_model": "gemini/gemini-1.5-flash"
-}
+bundle exec jekyll serve
 ```
 
-# TODO
-- [x] Gemini 2.5
-- [x] Gemini 2.0
-- [x] Claude Haiku 3.5
-- [x] Claude Sonnet 3.7
-- [x] o4 mini
-- [x] gpt-4o
+4. Visit `http://localhost:4000` in your browser to see your site.
+
+## Customization
+
+### Styling
+
+- Edit `assets/css/main.css` to customize the site's appearance
+- Modify `_layouts/default.html` to change the site structure
+- Update `_config.yml` to change site-wide settings
+
+### Adding New Posts
+
+1. Create a new markdown file in the `_posts` directory
+2. Use the front matter format shown above
+3. Write your content using markdown syntax
+4. Link to other posts using relative links: `[Link Text](post-filename.md)`
+
+## Deployment
+
+This site can be easily deployed to GitHub Pages:
+
+1. Create a new repository on GitHub
+2. Push your code to the repository
+3. Enable GitHub Pages in the repository settings
+4. Select the main branch as the source
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs - Markdown Site</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs | Markdown Site</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs" />
+<meta name="author" content="Tan-Hanh Pham, Phu-Vinh Nguyen, Dang The Hung, Bui Trong Duong, Vu Nguyen Thanh, Chris Ngo, Tri Quang Truong, Truong-Son Hy" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Overview" />
+<meta property="og:description" content="Overview" />
+<link rel="canonical" href="http://localhost:4000/posts/IQBench/" />
+<meta property="og:url" content="http://localhost:4000/posts/IQBench/" />
+<meta property="og:site_name" content="Markdown Site" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-03-20T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tan-Hanh Pham, Phu-Vinh Nguyen, Dang The Hung, Bui Trong Duong, Vu Nguyen Thanh, Chris Ngo, Tri Quang Truong, Truong-Son Hy"},"dateModified":"2024-03-20T00:00:00+01:00","datePublished":"2024-03-20T00:00:00+01:00","description":"Overview","headline":"IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/IQBench/"},"url":"http://localhost:4000/posts/IQBench/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <nav class="navbar animate__animated animate__fadeIn">
+        <div class="container">
+            <a href="/" class="logo">IQBench</a>
+            <div class="nav-links">
+                <!-- <a href="/">Home</a>
+                <a href="/posts">Posts</a>
+                <a href="/ml-models">Models</a>
+                <a href="/about">About</a> -->
+            </div>
+        </div>
+    </nav>
+
+    <main class="container animate__animated animate__fadeIn">
+        <article class="post animate__animated animate__fadeIn">
+    <header class="post-header">
+        <h1 class="post-title">IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs</h1>
+        
+        <p class="post-meta">By Tan-Hanh Pham, Phu-Vinh Nguyen, Dang The Hung, Bui Trong Duong, Vu Nguyen Thanh, Chris Ngo, Tri Quang Truong, Truong-Son Hy</p>
+        
+        
+        <p class="post-date">March 20, 2024</p>
+        
+    </header>
+
+    <div class="post-content">
+        <h2 id="overview">Overview</h2>
+
+<p><strong>IQBench</strong> is a novel benchmark developed to evaluate the <em>fluid intelligence</em> of Vision-Language Models (VLMs) using standardized <strong>visual IQ tests</strong>. It features:</p>
+
+<ul>
+  <li><strong>500 human-curated questions</strong></li>
+  <li><strong>10 reasoning domains</strong></li>
+  <li><strong>Sources</strong>: Images sourced from online repositories, textbooks, and educational content.</li>
+  <li><strong>Editing</strong>: Images were cleaned or regenerated to ensure quality and legality.</li>
+</ul>
+
+<p>Unlike other benchmarks, IQBench emphasizes both <strong>prediction accuracy</strong> and <strong>interpretability of reasoning</strong>.</p>
+
+<h2 id="tasks">Tasks</h2>
+
+<ul>
+  <li><strong>MDRT</strong>: Mechanical Deductive Reasoning Test</li>
+  <li><strong>DRTF</strong>: Deductive Reasoning Test with Figures</li>
+  <li><strong>3D SPRT</strong>: 3D Spatial Deductive Reasoning Test</li>
+  <li><strong>VRTS</strong>: Verbal Reasoning Test with Syllogisms</li>
+  <li><strong>IVRT</strong>: Inductive Verbal Reasoning Test</li>
+  <li><strong>Num.</strong>: Numerical Reasoning</li>
+  <li><strong>FS</strong>: Figure Series</li>
+  <li><strong>NS</strong>: Number Series</li>
+  <li><strong>Ana5 / Ana3</strong>: Anagram Tests (5/3-letter)</li>
+</ul>
+
+<h3 id="dataset-statistics">Dataset Statistics</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Total samples</td>
+      <td>500</td>
+    </tr>
+    <tr>
+      <td>Number of topics</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Samples per topic</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>Multiple choice questions</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <td>Open-ended questions</td>
+      <td>390</td>
+    </tr>
+    <tr>
+      <td>Avg. question length</td>
+      <td>27 words</td>
+    </tr>
+    <tr>
+      <td>Avg. reasoning pattern length</td>
+      <td>48 words</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="dataset-examples">Dataset examples</h3>
+
+<p><img src="/assets/images/dataset.jpg" alt="Dataset overview" /></p>
+
+<h2 id="data-quality-control">Data Quality Control</h2>
+
+<ul>
+  <li><strong>Uniqueness</strong>: Lexical overlap analysis to remove duplicates</li>
+  <li><strong>Standardization</strong>: Manual review to ensure consistency in format</li>
+  <li><strong>Visual emphasis</strong>: Questions are vision-centric to minimize reliance on language priors</li>
+  <li><strong>Legal compliance</strong>: All images are verified or newly created to avoid copyright issues</li>
+  <li><strong>Reduced data leakage</strong>: Human-generated content decreases the chance of pretraining contamination</li>
+</ul>
+
+<h2 id="evaluation-methods">Evaluation Methods</h2>
+
+<p><strong>IQBench</strong> adopts a <strong>dual-metric evaluation framework</strong> to assess both the <strong>accuracy</strong> and <strong>reasoning quality</strong> of Vision-Language Models (VLMs):</p>
+
+<h3 id="1-accuracy-score">1. Accuracy Score</h3>
+
+<ul>
+  <li>Measures if the final answer is <strong>correct</strong> (exact match).</li>
+  <li>Applies to <strong>multiple-choice</strong> and <strong>open-ended</strong> questions.</li>
+  <li>Score: <code class="language-plaintext highlighter-rouge">1</code> (correct), <code class="language-plaintext highlighter-rouge">0</code> (incorrect).</li>
+</ul>
+
+<h3 id="2-reasoning-score">2. Reasoning Score</h3>
+
+<ul>
+  <li>Evaluates how well the model’s explanation aligns with the <strong>expected reasoning path</strong>.</li>
+  <li>Uses an <strong>LLM-as-judge</strong> approach (e.g., <code class="language-plaintext highlighter-rouge">gpt-4o-mini</code>) to compare model explanations with human-annotated patterns.</li>
+  <li>Score: <code class="language-plaintext highlighter-rouge">1</code> (aligned), <code class="language-plaintext highlighter-rouge">0</code> (misaligned).</li>
+</ul>
+
+<h3 id="human-evaluation">Human Evaluation</h3>
+
+<ul>
+  <li>Human judges assess reasoning quality for <strong>qualitative insights</strong>, complementing automated scores.</li>
+</ul>
+
+<p>This combined approach ensures a more comprehensive evaluation of both <strong>answer accuracy</strong> and <strong>interpretability</strong> of reasoning.</p>
+
+<h2 id="-iqbench-evaluation-results">📊 IQBench Evaluation Results</h2>
+
+<p><img src="/assets/images/results.jpg" alt="Example result" /></p>
+
+<h3 id="-reasoning-evaluation">🔍 Reasoning Evaluation</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>MDRT</th>
+      <th>DRTF</th>
+      <th>3D SPRT</th>
+      <th>VRTS</th>
+      <th>IVRT</th>
+      <th>Num.</th>
+      <th>FS</th>
+      <th>NS</th>
+      <th>Ana5</th>
+      <th>Ana3</th>
+      <th><strong>Avg.</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gemini-2.5-flash</code></td>
+      <td>0.60</td>
+      <td>0.78</td>
+      <td>0.22</td>
+      <td>0.72</td>
+      <td>0.78</td>
+      <td>0.72</td>
+      <td>0.54</td>
+      <td>0.94</td>
+      <td>0.14</td>
+      <td>0.42</td>
+      <td><strong>0.586</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gemini-2.0-flash</code></td>
+      <td>0.50</td>
+      <td>0.52</td>
+      <td>0.16</td>
+      <td>0.74</td>
+      <td>0.74</td>
+      <td>0.28</td>
+      <td>0.32</td>
+      <td>0.58</td>
+      <td>0.16</td>
+      <td>0.08</td>
+      <td><strong>0.408</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">claude-3.7-sonnet</code></td>
+      <td>0.58</td>
+      <td>0.82</td>
+      <td>0.36</td>
+      <td>0.72</td>
+      <td>0.70</td>
+      <td>0.50</td>
+      <td>0.54</td>
+      <td>0.76</td>
+      <td>0.04</td>
+      <td>0.14</td>
+      <td><strong>0.516</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">claude-3.5-sonnet</code></td>
+      <td>0.60</td>
+      <td>0.64</td>
+      <td>0.16</td>
+      <td>0.74</td>
+      <td>0.72</td>
+      <td>0.16</td>
+      <td>0.28</td>
+      <td>0.52</td>
+      <td>0.12</td>
+      <td>0.06</td>
+      <td><strong>0.400</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gpt-4o</code></td>
+      <td>0.60</td>
+      <td>0.44</td>
+      <td>0.56</td>
+      <td>0.78</td>
+      <td>0.80</td>
+      <td>0.30</td>
+      <td>0.68</td>
+      <td>0.44</td>
+      <td>0.04</td>
+      <td>0.02</td>
+      <td><strong>0.466</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">o4-mini</code></td>
+      <td>0.92</td>
+      <td>0.88</td>
+      <td>0.82</td>
+      <td>0.78</td>
+      <td>0.80</td>
+      <td>0.72</td>
+      <td>0.90</td>
+      <td>0.90</td>
+      <td>0.10</td>
+      <td>0.14</td>
+      <td><strong>0.696</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gpt-o3</code></td>
+      <td>0.70</td>
+      <td>0.88</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>0.12</td>
+      <td>–</td>
+      <td>–</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="-accuracy-evaluation">✅ Accuracy Evaluation</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>MDRT</th>
+      <th>DRTF</th>
+      <th>3D SPRT</th>
+      <th>VRTS</th>
+      <th>IVRT</th>
+      <th>Num.</th>
+      <th>FS</th>
+      <th>NS</th>
+      <th>Ana5</th>
+      <th>Ana3</th>
+      <th><strong>Avg.</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gemini-2.5-flash</code></td>
+      <td>0.60</td>
+      <td>0.78</td>
+      <td>0.18</td>
+      <td>0.66</td>
+      <td>0.78</td>
+      <td>0.74</td>
+      <td>0.60</td>
+      <td>0.88</td>
+      <td>0.14</td>
+      <td>0.42</td>
+      <td><strong>0.578</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gemini-2.0-flash</code></td>
+      <td>0.58</td>
+      <td>0.56</td>
+      <td>0.22</td>
+      <td>0.70</td>
+      <td>0.74</td>
+      <td>0.52</td>
+      <td>0.44</td>
+      <td>0.84</td>
+      <td>0.16</td>
+      <td>0.14</td>
+      <td><strong>0.490</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">claude-3.7-sonnet</code></td>
+      <td>0.64</td>
+      <td>0.90</td>
+      <td>0.40</td>
+      <td>0.72</td>
+      <td>0.68</td>
+      <td>0.46</td>
+      <td>0.66</td>
+      <td>0.82</td>
+      <td>0.04</td>
+      <td>0.16</td>
+      <td><strong>0.548</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">claude-3.5-sonnet</code></td>
+      <td>0.62</td>
+      <td>0.68</td>
+      <td>0.20</td>
+      <td>0.74</td>
+      <td>0.74</td>
+      <td>0.32</td>
+      <td>0.42</td>
+      <td>0.76</td>
+      <td>0.12</td>
+      <td>0.10</td>
+      <td><strong>0.470</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gpt-4o</code></td>
+      <td>0.56</td>
+      <td>0.42</td>
+      <td>0.20</td>
+      <td>0.80</td>
+      <td>0.74</td>
+      <td>0.36</td>
+      <td>0.26</td>
+      <td>0.66</td>
+      <td>0.06</td>
+      <td>0.02</td>
+      <td><strong>0.408</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">o4-mini</code></td>
+      <td>0.72</td>
+      <td>0.86</td>
+      <td>0.34</td>
+      <td>0.66</td>
+      <td>0.76</td>
+      <td>0.82</td>
+      <td>0.60</td>
+      <td>0.94</td>
+      <td>0.02</td>
+      <td>0.14</td>
+      <td><strong>0.615</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gpt-o3</code></td>
+      <td>0.70</td>
+      <td>0.88</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>0.12</td>
+      <td>–</td>
+      <td>–</td>
+    </tr>
+  </tbody>
+</table>
+
+
+    </div>
+
+    <div class="post-navigation">
+        
+        
+    </div>
+</article> 
+    </main>
+
+    <footer class="footer animate__animated animate__fadeIn">
+        <div class="container">
+            <p>&copy; 2025 IQBench. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+</body>
+</html> 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    {% seo %}
+</head>
+<body>
+    <nav class="navbar animate__animated animate__fadeIn">
+        <div class="container">
+            <a href="{{ '/' | relative_url }}" class="logo">IQBench</a>
+            <div class="nav-links">
+                <!-- <a href="{{ '/' | relative_url }}">Home</a>
+                <a href="{{ '/posts' | relative_url }}">Posts</a>
+                <a href="{{ '/ml-models' | relative_url }}">Models</a>
+                <a href="{{ '/about' | relative_url }}">About</a> -->
+            </div>
+        </div>
+    </nav>
+
+    <main class="container animate__animated animate__fadeIn">
+        {{ content }}
+    </main>
+
+    <footer class="footer animate__animated animate__fadeIn">
+        <div class="container">
+            <p>&copy; {{ site.time | date: '%Y' }} IQBench. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html> 

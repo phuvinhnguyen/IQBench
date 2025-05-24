@@ -1,0 +1,91 @@
+---
+layout: default
+---
+
+<div class="auth-container">
+    <div class="auth-buttons">
+        <button id="google-auth-button" class="btn btn-primary">
+            <i class="fab fa-google"></i> Continue with Google
+        </button>
+        <div class="auth-divider">
+            <span>or</span>
+        </div>
+        <form id="email-auth-form" class="email-auth-form">
+            <input type="email" id="email-input" placeholder="Email address" required>
+            <input type="password" id="password-input" placeholder="Password" required>
+            <button type="submit" class="btn btn-secondary">Continue with Email</button>
+        </form>
+    </div>
+</div>
+
+<div class="auth-status" style="display: none;">
+    <div id="user-profile" class="user-profile">
+        <img id="user-image" src="" alt="Profile Picture" class="profile-picture">
+        <div class="user-info">
+            <h3 id="user-name"></h3>
+            <p id="user-email"></p>
+            <div class="user-stats">
+                <span id="user-tier">Free Tier</span>
+                <span id="user-credits">Credits: 100</span>
+            </div>
+        </div>
+        <div class="user-actions">
+            <button id="upgrade-button" class="btn btn-success">
+                <i class="fas fa-crown"></i> Upgrade to Premium
+            </button>
+            <button id="signout-button" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i> Sign Out
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="ml-models-container" style="display: none;">
+    <div class="models-grid">
+        <div class="model-card" onclick="openModelInterface('text')">
+            <i class="fas fa-font"></i>
+            <h3>Text Generation</h3>
+            <p>Generate text content</p>
+        </div>
+        <div class="model-card" onclick="openModelInterface('image')">
+            <i class="fas fa-image"></i>
+            <h3>Image Generation</h3>
+            <p>Create images from text</p>
+        </div>
+        <div class="model-card" onclick="openModelInterface('audio')">
+            <i class="fas fa-music"></i>
+            <h3>Audio Generation</h3>
+            <p>Generate audio content</p>
+        </div>
+        <div class="model-card" onclick="openModelInterface('multimodal')">
+            <i class="fas fa-random"></i>
+            <h3>Multimodal Generation</h3>
+            <p>Combine different types</p>
+        </div>
+    </div>
+</div>
+
+<div class="model-interface" style="display: none;">
+    <div class="model-content">
+        <button class="close-button" onclick="closeModelInterface()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="model-input">
+            <h3>Input</h3>
+            <textarea id="model-input-text" placeholder="Enter your prompt..."></textarea>
+            <input type="file" id="model-input-file" style="display: none;">
+            <button class="btn btn-primary" onclick="generateContent()">
+                <i class="fas fa-magic"></i> Generate
+            </button>
+        </div>
+        <div class="model-output">
+            <h3>Output</h3>
+            <div id="model-output-content"></div>
+        </div>
+    </div>
+</div>
+
+{{ content }}
+
+<script src="{{ '/assets/js/auth.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/ml-models.js' | relative_url }}"></script> 
