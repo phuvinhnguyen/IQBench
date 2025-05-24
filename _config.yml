@@ -1,7 +1,7 @@
 title: IQBench
 description: A Benchmark for Evaluating Fluid Intelligence of VLMs
-baseurl: ""
-url: ""
+baseurl: "/IQBench"
+url: "https://github.com/phuvinhnguyen"
 
 # Google OAuth configuration
 google_client_id: "YOUR_GOOGLE_CLIENT_ID"  # Replace with your actual Google Client ID
