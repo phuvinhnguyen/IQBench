@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-24T19:57:23+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Markdown Site</title><subtitle>A beautiful site generated from markdown files</subtitle><entry><title type="html">IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs</title><link href="http://localhost:4000/posts/IQBench/" rel="alternate" type="text/html" title="IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs" /><published>2024-03-20T00:00:00+01:00</published><updated>2024-03-20T00:00:00+01:00</updated><id>http://localhost:4000/posts/IQBench</id><content type="html" xml:base="http://localhost:4000/posts/IQBench/"><![CDATA[<h2 id="overview">Overview</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/IQBench/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/IQBench/" rel="alternate" type="text/html" /><updated>2025-06-02T11:40:35+02:00</updated><id>http://localhost:4000/IQBench/feed.xml</id><title type="html">IQBench</title><subtitle>A Benchmark for Evaluating Fluid Intelligence of VLMs</subtitle><entry><title type="html">IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs</title><link href="http://localhost:4000/IQBench/posts/IQBench/" rel="alternate" type="text/html" title="IQBench - A Benchmark for Evaluating Fluid Intelligence of VLMs" /><published>2025-05-20T00:00:00+02:00</published><updated>2025-05-20T00:00:00+02:00</updated><id>http://localhost:4000/IQBench/posts/IQBench</id><content type="html" xml:base="http://localhost:4000/IQBench/posts/IQBench/"><![CDATA[<h2 id="overview">Overview</h2>
 
 <p><strong>IQBench</strong> is a novel benchmark developed to evaluate the <em>fluid intelligence</em> of Vision-Language Models (VLMs) using standardized <strong>visual IQ tests</strong>. It features:</p>
 
@@ -68,7 +68,7 @@
 
 <h3 id="dataset-examples">Dataset examples</h3>
 
-<p><img src="/assets/images/dataset.jpg" alt="Dataset overview" /></p>
+<p><img src="https://phuvinhnguyen.github.io/IQBench/assets/images/dataset.jpg" alt="Dataset overview" /></p>
 
 <h2 id="data-quality-control">Data Quality Control</h2>
 
@@ -110,7 +110,7 @@
 
 <h2 id="-iqbench-evaluation-results">📊 IQBench Evaluation Results</h2>
 
-<p><img src="/assets/images/results.jpg" alt="Example result" /></p>
+<p><img src="https://phuvinhnguyen.github.io/IQBench/assets/images/results.jpg" alt="Example result" /></p>
 
 <h3 id="-reasoning-evaluation">🔍 Reasoning Evaluation</h3>
 
